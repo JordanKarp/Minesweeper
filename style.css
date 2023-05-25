@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: #263237;
+    color: #ddd;
+    font-family: 'Courier New', Courier, monospace;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+#grid {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#grid tr td {
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background-color: #bcbcbc;
+    border-radius: 1px;
+    font-weight: 700;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 16px
+}
+
+#grid tr td.active {
+    border: none;
+    background-color: #afafaf;
+}
+
+#grid tr td.mine {
+    border: none;
+    background-color: #d84315;
+    color: black;
+}
+
+#grid tr td.correct {
+    border: none;
+    background-color: #15d853;
+}
+
+#grid tr td.flag {
+    border: none;
+    background-color: #d89015;
+}
+
+/* #grid tr td.\30 {
+    opacity: 100%;
+} */
+
+#grid tr td.\31 {
+    color: blue;
+}
+
+#grid tr td.\32 {
+    color: rgb(5, 112, 3);
+}
+
+#grid tr td.\33 {
+    color: rgb(251, 0, 0);
+}
+
+#grid tr td.\34 {
+    color: rgb(0, 0, 109);
+}
+
+#grid tr td.\35 {
+    color: rgb(107, 0, 0);
+}
+
+#grid tr td.\36 {
+    color: rgb(15, 110, 110);
+}
+
+#grid tr td.\37 {
+    color: rgb(0, 0, 0);
+}
+
+#grid tr td.\38 {
+    color: rgb(109, 109, 109);
+}
+
+
+button {
+    margin: 12px 0;
+    padding: 4px 0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background-color: #bcbcbc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}

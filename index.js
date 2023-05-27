@@ -2,17 +2,24 @@ const grid = document.getElementById("grid");
 let lockGame = false;
 const debug = false;
 
-const ROWS = 15;
-const COLS = 15;
-const MINES = 15;
+const ROWS = 9;
+const COLS = 9;
+const MINES = 10;
+
+function newGame(rows = ROWS, cols = COLS, mines = MINES) {
+    window.rows = rows
+    window.cols = cols
+    window.mines = mines
+    generateGrid();
+}
 
 // Gen Grid
 function generateGrid() {
     lockGame = false;
     grid.innerHTML = "";
-    for (let i = 0; i < ROWS; i++) {
+    for (let i = 0; i < window.rows; i++) {
         row = grid.insertRow(i);
-        for (let j = 0; j < COLS; j++) {
+        for (let j = 0; j < window.cols; j++) {
             cell = row.insertCell(j);
             cell.onclick = function () { init(this); };
             cell.oncontextmenu = function (e) {
@@ -28,7 +35,7 @@ function generateGrid() {
 }
 
 function generateMines() {
-    for (let i = 0; i < MINES; i++) {
+    for (let i = 0; i < window.mines; i++) {
         let row = Math.floor(Math.random() * ROWS);
         let col = Math.floor(Math.random() * COLS);
         let cell = grid.rows[row].cells[col];
@@ -40,7 +47,7 @@ function generateMines() {
 }
 
 function revealMines() {
-    for (let i = 0; i < ROWS; i++) {
+    for (let i = 0; i < window.rows; i++) {
         for (let j = 0; j < COLS; j++) {
             let cell = grid.rows[i].cells[j];
             if (cell.getAttribute("mine") == 'true') {
@@ -66,7 +73,7 @@ function checkWin() {
 
 function checkFlagWin() {
     let gameComplete = true;
-    for (let i = 0; i < ROWS; i++) {
+    for (let i = 0; i < window.rows; i++) {
         for (let j = 0; j < COLS; j++) {
             let cell = grid.rows[i].cells[j];
             // if there are mines that are not flagged, continue game

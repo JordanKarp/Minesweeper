@@ -12,9 +12,53 @@
 <body>
     <h1>Minesweeper</h1>
     <table id="grid"></table>
-    <button onclick="generateGrid();">Reset Game</button>
-    <script src="index.js"></script>
-    <script>generateGrid();</script>
+    <button onclick="newGame();">Reset Game</button>
+
+    <button data-open-modal id="options-open">Options</button>
+
+    <dialog data-modal id="options">
+        <div>Coming soon...</div>
+        <input type="radio" id="beginner" name="level" value="Beginner" checked="true">
+        <label for="beginner">Beginner</label><br>
+        <input type="radio" id="intermediate" name="level" value="Intermediate">
+        <label for="intermediate">Intermediate</label><br>
+        <input type="radio" id="advanced" name="level" value="Advanced">
+        <label for="advanced">Advanced</label><br>
+        <input type="radio" id="custom" name="level" value="Custom">
+        <label for="custom">Custom</label><br>
+        <br>
+        <input type="checkbox" id="showTime" name="showTime" value="Show Timer">
+        <label for="showTime"> Show the timer</label><br>
+        <input type="checkbox" id="showFlag" name="showFlag" value="Show Flags">
+        <label for="showFlag"> Show flag counter</label><br>
+
+        <button data-close-modal id="options-reset" onclick="newGame();">Reset Game</button>
+        <button data-close-modal id="options-close">X</button>
+    </dialog>
+    <script src="index.js">
+    </script>
+    <script>
+        newGame();
+
+        const openOptions = document.getElementById('options-open')
+        const closeOptions = document.getElementById('options-close')
+        const resetOptions = document.getElementById('options-reset')
+
+        const options = document.getElementById('options')
+
+        openOptions.addEventListener("click", () => {
+            options.showModal()
+        })
+
+        closeOptions.addEventListener("click", () => {
+            options.close()
+        })
+
+        resetOptions.addEventListener("click", () => {
+            options.close()
+        })
+
+    </script>
 </body>
 
 </html>

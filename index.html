@@ -58,6 +58,18 @@
             options.close()
         })
 
+        options.addEventListener("click", e => {
+            const modalDimensions = options.getBoundingClientRect()
+            if (
+                e.clientX < modalDimensions.left ||
+                e.clientX > modalDimensions.right ||
+                e.clientY < modalDimensions.top ||
+                e.clientY > modalDimensions.bottom
+            ) {
+                options.close()
+            }
+        })
+
     </script>
 </body>
 

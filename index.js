@@ -6,6 +6,8 @@ const ROWS = 9;
 const COLS = 9;
 const MINES = 10;
 
+
+
 function newGame(rows = ROWS, cols = COLS, mines = MINES) {
     window.rows = rows
     window.cols = cols
@@ -18,9 +20,9 @@ function generateGrid() {
     lockGame = false;
     grid.innerHTML = "";
     for (let i = 0; i < window.rows; i++) {
-        row = grid.insertRow(i);
+        let row = grid.insertRow(i);
         for (let j = 0; j < window.cols; j++) {
-            cell = row.insertCell(j);
+            let cell = row.insertCell(j);
             cell.onclick = function () { init(this); };
             cell.oncontextmenu = function (e) {
                 e.preventDefault();
@@ -36,8 +38,8 @@ function generateGrid() {
 
 function generateMines() {
     for (let i = 0; i < window.mines; i++) {
-        let row = Math.floor(Math.random() * ROWS);
-        let col = Math.floor(Math.random() * COLS);
+        let row = Math.floor(Math.random() * window.rows);
+        let col = Math.floor(Math.random() * window.cols);
         let cell = grid.rows[row].cells[col];
         cell.setAttribute("mine", "true");
         if (debug) {
@@ -48,7 +50,7 @@ function generateMines() {
 
 function revealMines() {
     for (let i = 0; i < window.rows; i++) {
-        for (let j = 0; j < COLS; j++) {
+        for (let j = 0; j < window.cols; j++) {
             let cell = grid.rows[i].cells[j];
             if (cell.getAttribute("mine") == 'true') {
                 if (cell.className == 'flag') {
@@ -74,7 +76,7 @@ function checkWin() {
 function checkFlagWin() {
     let gameComplete = true;
     for (let i = 0; i < window.rows; i++) {
-        for (let j = 0; j < COLS; j++) {
+        for (let j = 0; j < window.cols; j++) {
             let cell = grid.rows[i].cells[j];
             // if there are mines that are not flagged, continue game
             if ((cell.getAttribute("mine") == 'true') && (!cell.className.includes("flag"))) {
@@ -90,8 +92,8 @@ function checkFlagWin() {
 }
 function checkGameWin() {
     let gameComplete = true;
-    for (let i = 0; i < ROWS; i++) {
-        for (let j = 0; j < COLS; j++) {
+    for (let i = 0; i < window.rows; i++) {
+        for (let j = 0; j < window.cols; j++) {
             let cell = grid.rows[i].cells[j];
             // If there are non-mines that are not activated, continue game
             if ((cell.getAttribute("mine") == 'false') && (!cell.className.includes("active"))) {
@@ -126,8 +128,8 @@ function init(cell) {
         let mineCount = 0;
         let cellRow = cell.parentNode.rowIndex;
         let cellCol = cell.cellIndex;
-        for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, ROWS - 1); i++) {
-            for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, COLS - 1); j++) {
+        for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, window.rows - 1); i++) {
+            for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, window.cols - 1); j++) {
                 if (grid.rows[i].cells[j].getAttribute("mine") == "true") {
                     mineCount++;
                 }
@@ -140,8 +142,8 @@ function init(cell) {
         // Check neighbors and expand outwards if there are 0 mines nearby.
         if (mineCount == 0) {
             cell.innerHTML = " ";
-            for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, ROWS - 1); i++) {
-                for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, COLS - 1); j++) {
+            for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, window.rows - 1); i++) {
+                for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, window.cols - 1); j++) {
                     if (grid.rows[i].cells[j].innerHTML == "") {
                         init(grid.rows[i].cells[j]);
                     }

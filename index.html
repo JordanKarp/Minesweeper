@@ -81,23 +81,9 @@
             options.showModal()
         })
 
-
         resetOptions.addEventListener("click", () => {
             const level = document.querySelector('input[name="level"]:checked').value;
             newGame(rows = customR.value, cols = customC.value, mines = customM.value,)
-
-            // console.log(level)
-            // if (level === 'Beginner'){
-            //     newGame(rows=9, cols=9, mines=10);
-            // } else if (level === 'Intermediate') {
-            //     newGame(rows=16, cols=16, mines=40);
-            // } else if (level === 'Advanced') {
-            //     newGame(rows=16, cols=30, mines=99);
-            // } else if (level === 'Custom') {
-            //     newGame(rows=16, cols=30, mines=99);
-
-            // }
-
             options.close()
 
         })

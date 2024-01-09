@@ -1,4 +1,9 @@
 const grid = document.getElementById("grid");
+const minesIndicator = document.getElementById('minesRemaining')
+const timer = document.getElementById('timeElapsed')
+let seconds = 0
+let stopstatus = 0;
+
 let lockGame = false;
 const debug = false;
 
@@ -12,6 +17,9 @@ function newGame(rows = ROWS, cols = COLS, mines = MINES) {
     window.rows = rows
     window.cols = cols
     window.mines = mines
+    window.flags = new Number(mines)
+    minesIndicator.innerHTML = window.flags
+    resetTimer()
     generateGrid();
 }
 
@@ -48,6 +56,27 @@ function generateMines() {
     }
 }
 
+function startTimer() {
+    if(stopstatus!==0){
+        clearInterval(stopstatus);
+    }
+    stopstatus = setInterval(()=>{
+        seconds+=1;
+        timer.innerHTML = seconds < 10 ?("0" + seconds) : seconds;
+    },1000)
+    console.log('start')
+}
+
+function pauseTimer () {
+    clearInterval(stopstatus);
+}
+
+function resetTimer() {
+    clearInterval(stopstatus);
+    seconds = 0;
+    timer.innerHTML = '00 ';
+}
+
 function revealMines() {
     for (let i = 0; i < window.rows; i++) {
         for (let j = 0; j < window.cols; j++) {
@@ -66,7 +95,8 @@ function revealMines() {
 function checkWin() {
     if (checkFlagWin() || checkGameWin()) {
         lockGame = true;
-        revealMines()
+        pauseTimer();
+        revealMines();
         alert("You win! You found all the mines!");
         return;
     }
@@ -109,9 +139,13 @@ function markFlag(cell) {
     }
     if (cell.className == "flag") {
         cell.className = "";
+        window.flags++;
+        
     } else if (!cell.className.includes("active")) {
         cell.className = "flag";
+        window.flags--;
     }
+    minesIndicator.innerHTML = window.flags;
     checkWin();
 }
 
@@ -121,9 +155,15 @@ function init(cell) {
     }
     if (cell.getAttribute("mine") == "true") {
         cell.innerHTML = "X"
+        pauseTimer();
         revealMines();
         lockGame = true;
+       
     } else {
+        if (seconds == 0) {
+            startTimer()
+        }
+
         cell.className = "active";
         let mineCount = 0;
         let cellRow = cell.parentNode.rowIndex;

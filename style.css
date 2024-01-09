@@ -18,6 +18,8 @@ body {
 
 #options {
     padding: 10px;
+    margin: 1rem;
+    border-radius: 1rem;
 }
 
 h1 {
@@ -101,14 +103,30 @@ h1 {
     color: rgb(109, 109, 109);
 }
 
+#game {
+    background-color: #455c65;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#gameHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
 
 button {
-    margin: 12px 0;
-    padding: 5px;
-    border-top: 1px solid #fff;
-    border-left: 1px solid #fff;
-    background-color: #bcbcbc;
-    border-radius: 4px;
-    outline: none;
     cursor: pointer;
+    padding: .4rem;
+}
+
+footer {
+    margin-top: 1rem;
+    text-align: center;
+    position: sticky;
+}
+
+footer a {
+    color: #ddd;
 }

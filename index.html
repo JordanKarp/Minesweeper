@@ -10,10 +10,18 @@
 </head>
 
 <body>
-    <h1>Minesweeper</h1>
-    <table id="grid"></table>
-    <button onclick="newGame(window.rows, window.cols, window.mines);">New Game</button>
-    <button data-open-modal id="options-open">Options</button>
+    <div id="game">
+        <h1>Minesweeper</h1>
+        <div id="gameHeader">
+            <p id='minesRemaining'>10</p>
+            <button onclick="newGame(window.rows, window.cols, window.mines);">New Game</button>
+            <button data-open-modal id="options-open">Options</button>
+            <p id='timeElapsed'>000</p>
+        </div>
+        <table id="grid"></table>
+    </div>
+    
+
 
     <dialog data-modal id="options">
         <input type="radio" id="beginner" name="level" value="Beginner" checked="true">
@@ -25,13 +33,26 @@
         <input type="radio" id="custom" name="level" value="Custom">
         <label for="custom">Custom</label><br>
         <div id="custom"></div>
-            <input type="number" id="customRows" min="5" max="20" value="9">
-            <input type="number" id="customCols" min="5" max="20" value="10">
-            <input type="number" id="customMines" min="0" max="200" value="10">
+            <label for="customRows">Rows:
+                <input type="number" id="customRows" min="5" max="20" value="9">
+            </label> <br>
+            <label for="customCols">Columns:
+                <input type="number" id="customCols" min="5" max="20" value="10">
+            </label> <br>
+            <label for="customMines">Mines:
+                <input type="number" id="customMines" min="0" max="200" value="10">
+            </label>
         </div>
         <br>
         <button data-close-modal id="options-reset">New Round</button>
     </dialog>
+
+    <footer class="footer">
+        <p>© Copyright 2023, <a href='https://jordankarp.github.io/'>Jordan Karp</a></p>
+    </footer>
+
+
+
     <script src="index.js">
     </script>
     <script>
